@@ -1,4 +1,10 @@
 body {
-    background-color: black;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
     text-decoration-color: chartreuse;
+}
+
+#canvas {
+    background-color: black;
 }

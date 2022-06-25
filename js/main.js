@@ -16,11 +16,14 @@ function makeid(length) {
 console.log(makeid(5));
 
 function initCanvas() {
-    canvas = document.getElementById("canvas");
-    canvas.width = document.body.clientWidth;
-    canvas.height = document.body.clientHeight;
-
+    let canvas = document.getElementById("canvas");
+    let context = canvas.getContext("2d");
+    let canvasW = window.innerWidth;
+    let canvasH = window.innerHeight;
+    canvas.width = canvasW;
+    canvas.height = canvasH;
 }
+
 function setup() {
 
 }
@@ -29,8 +32,13 @@ function runMatrix() {
 
 }
 
+async function runText() {
+
+}
+
 window.onload = function() {
     initCanvas();
+    //await runText();
     setup();
     runMatrix();
 }
