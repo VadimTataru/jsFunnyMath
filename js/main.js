@@ -2,6 +2,7 @@ const alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()|:;/?<>';
 var canvas;
 var context;
 var hor_size = 20;
+var columnCount;
 
 function rand(max) {
     return Math.floor(Math.random() * max)
@@ -22,20 +23,14 @@ function initCanvas() {
     let canvasH = window.innerHeight;
     canvas.width = canvasW;
     canvas.height = canvasH;
+    columnCount = canvasW / hor_size;
 }
 
+//Intro output region
 function printChar(text, hor_pos, vert_pos) {
     context.font = "24px Arial"
     context.fillStyle = "#7bff8d";
     context.fillText(text, hor_pos, vert_pos);    
-}
-
-function setup() {
-
-}
-
-function runMatrix() {
-
 }
 
 async function printText(text) {
@@ -52,24 +47,29 @@ async function run() {
     clear();
 
     await printText("...we have a city to burn.");
-    timeout(5000);
+    await timeout(5000);
     clear();
 }
+//Intro output end region
 
+//Colums output region
+function generateColumn(numChars) {
+    var chars = [];
+    for (var i = 0; i < numChars; i++) {
+        chars.push(alphabet[rand(alphabet.length)]);
+    }
+    return chars;
+}
+
+function runMatrix() {
+    var column = generateColumn(10);
+    console.log(column);
+}
+//Colums output end region
 window.onload = async function() {
     initCanvas();
     await timeout(2000);
     await run();
-    setup();
     runMatrix();
+    //window.setInterval(runMatrix.bind(context), 30);
 }
-
-function makeid(length) {
-    var result           = '';
-    var charactersLength = alphabet.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += alphabet.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-}
-console.log(makeid(5));
