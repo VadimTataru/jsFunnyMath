@@ -96,8 +96,8 @@ function runMatrix() {
 
 window.onload = async function() {
     initCanvas();
-    //await timeout(2000);
-    //await run();
-    runMatrix();
-    //window.setInterval(runMatrix.bind(context), 30);
+    await timeout(2000);
+    await run();
+    //runMatrix();
+    window.setInterval(runMatrix.bind(context), 30);
 }
