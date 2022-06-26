@@ -4,6 +4,7 @@ var context;
 var font_size = 20;
 var columnCount;
 var charsCount;
+var columns = [];
 
 function rand(max) {
     return Math.floor(Math.random() * max)
@@ -26,6 +27,7 @@ function initCanvas() {
     canvas.height = canvasH;
     columnCount = Math.floor(canvasW / font_size);
     charsCount = Math.floor(canvasH / font_size);
+    columns = generateColumns(columnCount, charsCount);
 }
 
 //Intro output region
@@ -71,12 +73,17 @@ function generateColumns(numColumns, numChars){
     return columns;
 }
 
-async function runMatrix() {
-    var columns = generateColumns(columnCount, charsCount);
+async function runMatrix(_columns) {
+    var cols = _columns;
     
-    for (var i = 0; i < columns.length; i++) {
+    for (var i = 0; i < cols.length; i++) {
         const col = columns[i];
 
+        var skip = rand(2);
+        console.log(skip);
+        if(skip == 0) {
+            continue;
+        }
 
         for(var j = 0; j < col.length; j ++) {
             const char = col[j];
@@ -95,6 +102,7 @@ window.onload = async function() {
     initCanvas();
     await timeout(2000);
     await run();
-    runMatrix();
+    window.addEventListener("resize", initCanvas.bind(context), false);
+    runMatrix(columns);
     //window.setInterval(runMatrix.bind(context), 30);
 }
